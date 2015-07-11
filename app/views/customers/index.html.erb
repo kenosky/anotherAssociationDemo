@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Account for Customer
+   <%= @customer.firstname %>
+   <%= @customer.lastname %>
+</h1>
+
+<!-- a customer can have 0 or 1 account-->
+<!-- if the customer does not have an account we cannot display the account details as the application will crash-->
+<% if @account == nil %>
+
+<h3> This customer has no account yet. </h3>
+
+<% else %>
+  <!-- the account exists, let's display its details-->
+  
+ <table>
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+      <tr>
+      <td><%= @account.details %></td>
+      <td><%= @account.customer %></td>
+      <td><%= link_to 'Show', customer_account_path(@customer, @account) %></td>
+      <td><%= link_to'Edit', edit_customer_account_path(@customer, @account) %></td>
+      <td><%= link_to 'Destroy',customer_account_path(@customer, @account),method: :delete,data: { confirm:'Are you sure?'} %></td>
+      </tr>
+   </tbody>
+ </table>
+ 
+<% end %>
+ <br>
+
+<%= link_to 'New Account', new_customer_account_path(@customer)%>
+<%= link_to 'Back to Customer', @customer %>
